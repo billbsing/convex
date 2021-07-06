@@ -31,7 +31,7 @@ public class Tokenizer {
 	TokenPosition position;
 	List<Token> tokenList = new ArrayList<Token>();
 
-	public Tokenizer(String source) {
+	private Tokenizer(String source) {
 		buffer = new StringBuffer(source);
 		position = TokenPosition.create();
 		seperators.put(Token.Type.COMMENT, ";");
@@ -51,6 +51,10 @@ public class Tokenizer {
 		seperators.put(Token.Type.UNQUOTE_SPLICING, "~@");
 
 		read();
+	}
+
+	public static Tokenizer create(String source) {
+		return new Tokenizer(source);
 	}
 
 	protected void readUntil(Token token, String stopString) {
@@ -176,8 +180,17 @@ public class Tokenizer {
 		pushToken(token);
 	}
 
-	public ListIterator<Token> getTokenIterator() {
-		return tokenList.listIterator();
+	public List<Token> getTokenList() {
+		return tokenList;
+	}
+
+	public void printOut() {
+		ListIterator<Token> tokenIterator = tokenList.listIterator();
+		while (tokenIterator.hasNext()) {
+			Token token = tokenIterator.next();
+			TokenPosition position = token.getPosition();
+			System.out.println(token.getType() + " " + position.getColumn() + "," + position.getRow() + " " +token.toString());
+		}
 	}
 
 }

@@ -26,6 +26,7 @@ import convex.core.data.prim.CVMChar;
 import convex.core.data.prim.CVMDouble;
 import convex.core.data.prim.CVMLong;
 import convex.core.exceptions.ParseException;
+import convex.core.lang.parser.Parser;
 import convex.core.lang.parser.Tokenizer;
 import convex.core.lang.parser.Token;
 import convex.core.lang.parser.TokenPosition;
@@ -42,14 +43,9 @@ public class Reader  {
 	public static <R extends ACell> R read(String source) {
 		System.out.println(source);
 		buffer = new StringBuffer(source);
-		Tokenizer tokens = new Tokenizer(source);
-		ListIterator<Token> tokenIterator = tokens.getTokenIterator();
-		while (tokenIterator.hasNext()) {
-			Token token = tokenIterator.next();
-			TokenPosition position = token.getPosition();
-			System.out.println(token.getType() + " " + position.getColumn() + "," + position.getRow() + " " +token.toString());
-		}
-
+		Tokenizer tokenizer = Tokenizer.create(source);
+		Parser parser = Parser.create(tokenizer.getTokenList());
+		tokenizer.printOut();
 		return (R) CVMChar.create(' ');
 	}
 

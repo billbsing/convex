@@ -16,6 +16,7 @@
 
 package convex.core.lang;
 
+/*
 public class ScryptLetterOrDigitMatcher extends AbstractScryptCharacterMatcher {
 
     public ScryptLetterOrDigitMatcher() {
@@ -27,3 +28,5 @@ public class ScryptLetterOrDigitMatcher extends AbstractScryptCharacterMatcher {
         return Character.isJavaIdentifierPart(c);
     }
 }
+
+*/

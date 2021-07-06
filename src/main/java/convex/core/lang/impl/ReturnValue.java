@@ -1,15 +1,13 @@
 package convex.core.lang.impl;
 
-import org.parboiled.common.Utils;
-
 import convex.core.ErrorCodes;
 import convex.core.data.ACell;
 
 /**
  * Class representing a function return value
- * 
+ *
  * "Computers are useless. They can only give you answers." - Pablo Picasso
- * 
+ *
  * @param <T> Type of return value
  */
 public class ReturnValue<T extends ACell> extends AReturn {
@@ -30,7 +28,7 @@ public class ReturnValue<T extends ACell> extends AReturn {
 
 	@Override
 	public String toString() {
-		return "ReturnValue: " + Utils.toString(value);
+		return "ReturnValue: " + value;
 	}
 
 	@Override

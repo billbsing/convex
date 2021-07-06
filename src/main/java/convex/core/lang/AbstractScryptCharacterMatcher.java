@@ -1,8 +1,11 @@
 package convex.core.lang;
 
+/*
 import org.parboiled.MatcherContext;
 import org.parboiled.matchers.CustomMatcher;
+*/
 
+/*
 public abstract class AbstractScryptCharacterMatcher extends CustomMatcher {
 
     protected AbstractScryptCharacterMatcher(String label) {
@@ -40,3 +43,4 @@ public abstract class AbstractScryptCharacterMatcher extends CustomMatcher {
 
     protected abstract boolean acceptChar(char c);
 }
+*/

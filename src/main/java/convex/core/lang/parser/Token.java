@@ -94,4 +94,8 @@ public class Token {
 		return m.matches();
 	}
 
+	public Matcher matcher(Pattern pattern) {
+		return pattern.matcher(token);
+	}
+
 }

@@ -41,7 +41,6 @@ public class Reader  {
 
 
 	public static <R extends ACell> R read(String source) {
-		System.out.println(source);
 		buffer = new StringBuffer(source);
 		Tokenizer tokenizer = Tokenizer.create(source);
 		Parser parser = Parser.create(tokenizer.getTokenList());

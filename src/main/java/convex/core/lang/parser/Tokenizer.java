@@ -152,6 +152,10 @@ public class Tokenizer {
 						readUntil(token, NEW_LINE);
 						pushToken(token);
 						break;
+					case COMMENT_INLINE:
+						readUntil(token, WHITESPACE + NEW_LINE);
+						pushToken(token);
+						break;
 					case STRING:
 						pushStringToken();
 						break;

@@ -45,8 +45,8 @@ public class Reader  {
 		buffer = new StringBuffer(source);
 		Tokenizer tokenizer = Tokenizer.create(source);
 		Parser parser = Parser.create(tokenizer.getTokenList());
-		tokenizer.printOut();
-		return (R) CVMChar.create(' ');
+		parser.parse();
+		return (R) parser.generate();
 	}
 
 	public static ACell readResource(String path)  {

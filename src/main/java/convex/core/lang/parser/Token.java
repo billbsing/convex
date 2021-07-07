@@ -1,6 +1,10 @@
 package convex.core.lang.parser;
 
+
 import java.lang.StringBuffer;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 
 public class Token {
 
@@ -10,7 +14,6 @@ public class Token {
 		VALUE,
 		COMMENT,
 		COMMENT_INLINE,
-		STRING_OPEN_CLOSE,
 		STRING,
 		LIST_OPEN,
 		LIST_CLOSE,
@@ -65,4 +68,30 @@ public class Token {
 	public Type getType() {
 		return tokenType;
 	}
+
+	public boolean isType(Type value) {
+        return tokenType == value;
+    }
+
+	public String getValue() {
+		return token.toString();
+	}
+
+	public boolean isFirstChar(char value) {
+		return token.charAt(0) == value;
+	}
+
+	public char charAt(int index) {
+		return token.charAt(index);
+	}
+
+	public String subString(int position) {
+		return token.substring(position);
+	}
+
+	public boolean isMatch(Pattern pattern) {
+		Matcher m = pattern.matcher(token);
+		return m.matches();
+	}
+
 }

@@ -36,7 +36,7 @@ public class Tokenizer {
 		position = TokenPosition.create();
 		seperators.put(Token.Type.COMMENT, ";");
 		seperators.put(Token.Type.COMMENT_INLINE, "#_");
-		seperators.put(Token.Type.STRING_OPEN_CLOSE, "\"");
+		seperators.put(Token.Type.STRING, "\"");
 		seperators.put(Token.Type.LIST_OPEN, "(");
 		seperators.put(Token.Type.LIST_CLOSE, ")");
 		seperators.put(Token.Type.VECTOR_OPEN, "[");
@@ -75,19 +75,12 @@ public class Tokenizer {
 		}
 	}
 
-	protected void readStringToken(Token token) {
-		pushToken(token);
-		position.next();
-		position.move(1, 0);
-
-		token = Token.create(position, Token.Type.STRING);
+	protected void pushStringToken() {
+		Token token = Token.create(position, Token.Type.STRING);
 		while (position.getIndex() < buffer.length()) {
 			char value = buffer.charAt(position.getIndex());
 			if (STRING_CHAR == value) {
 				// push the string value as a token
-				pushToken(token);
-				token = Token.create(position, Token.Type.STRING_OPEN_CLOSE);
-				token.appendChar(value);
 				pushToken(token);
 				position.next();
 				position.move(1, 0);
@@ -159,8 +152,8 @@ public class Tokenizer {
 						readUntil(token, NEW_LINE);
 						pushToken(token);
 						break;
-					case STRING_OPEN_CLOSE:
-						readStringToken(token);
+					case STRING:
+						pushStringToken();
 						break;
 					default:
 						pushToken(token);

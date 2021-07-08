@@ -11,6 +11,8 @@ import convex.core.data.Address;
 import convex.core.data.Blob;
 import convex.core.data.Keyword;
 import convex.core.data.Lists;
+import convex.core.data.Maps;
+import convex.core.data.Sets;
 import convex.core.data.Strings;
 import convex.core.data.Symbol;
 import convex.core.data.Vectors;
@@ -25,13 +27,14 @@ import convex.core.lang.Symbols;
 public class Parser {
 
 
-	private static final Pattern KEYWORD_PATTERN = Pattern.compile(":[a-zA-Z][a-zA-Z0-9\\-/\\.]+[0-9a-zA-Z]");
 	private static final String SYMBOL_FIRST_CHAR = "[a-zA-Z\\.\\*\\+!\\-_?\\$%&=<>]";
 	private static final String SYMBOL_NON_NUMERIC_CHAR = "[a-zA-Z\\.\\*\\+!\\-_?\\$%&=<>:#]";
 	private static final String SYMBOL_FOLLOWING_CHAR = "[0-9a-zA-Z\\.\\*\\+!\\-_?\\$%&=<>:#]";
 	private static final Pattern SYMBOL_PATTERN_1 = Pattern.compile(SYMBOL_FIRST_CHAR + SYMBOL_FOLLOWING_CHAR + "*");
 	private static final Pattern SYMBOL_PATTERN_2 = Pattern.compile("[\\.+-]" + SYMBOL_NON_NUMERIC_CHAR + "+" + SYMBOL_FOLLOWING_CHAR + "*");
 	private static final Pattern SYMBOL_PATTERN_3 = Pattern.compile("[/.]");
+
+	private static final Pattern KEYWORD_PATTERN = Pattern.compile(":" + SYMBOL_FIRST_CHAR + SYMBOL_FOLLOWING_CHAR + "*");
 
 	private static final Pattern SYMBOL_LOOKUP_ADDRESS_MATCH = Pattern.compile("#([0-9]+)/(" + SYMBOL_FIRST_CHAR + SYMBOL_FOLLOWING_CHAR + "*)");
 	private static final Pattern SYMBOL_LOOKUP_MATCH = Pattern.compile(
@@ -288,6 +291,18 @@ public class Parser {
 					currentNode = currentNode.getParentNode();
 					break;
 				case MAP_META_SET_CLOSE:
+					if (currentNode.getToken().isType(Token.Type.MAP_OPEN)) {
+						currentNode.setValue(Maps.of(currentNode.getValues()));
+					}
+					else if (currentNode.getToken().isType(Token.Type.META_OPEN)) {
+						currentNode.setValue(Maps.of(currentNode.getValues()));
+					}
+					else if (currentNode.getToken().isType(Token.Type.SET_OPEN)) {
+						currentNode.setValue(Sets.of(currentNode.getValues()));
+					}
+					else {
+						throw Parser.createError("missing closing map or set bracket '}'", currentNode.getToken());
+					}
 					break;
 				case STRING:
 					node = Node.create(currentNode, token);

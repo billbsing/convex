@@ -6,17 +6,18 @@ import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import org.junit.jupiter.api.Test;
-import org.parboiled.Rule;
-import org.parboiled.errors.ParserRuntimeException;
-import org.parboiled.parserunners.ReportingParseRunner;
+// import org.parboiled.Rule;
+// import org.parboiled.errors.ParserRuntimeException;
+// import org.parboiled.parserunners.ReportingParseRunner;
 
 import convex.core.data.ACell;
 import convex.core.data.Syntax;
 
+/*
 public class ScryptNextTest {
 
     static final Context<?> CONTEXT = TestState.CONTEXT.fork();
-    
+
     static ScryptNext scrypt() {
         return ScryptNext.instance();
     }
@@ -86,7 +87,7 @@ public class ScryptNextTest {
 
         // ErrorValue[:STATE] : Actor does not exist
         assertNobodyError(step("call #6666666 buy(\"Something\")"));
-        
+
         assertCastError(step("call 6666666 buy(\"Something\")"));
 
         // Can't call without a function name
@@ -289,3 +290,4 @@ public class ScryptNextTest {
     }
 
 }
+*/

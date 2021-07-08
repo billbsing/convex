@@ -4,7 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.Random;
 
-import org.parboiled.common.Utils;
+// import org.parboiled.common.Utils;
 
 import com.pholser.junit.quickcheck.From;
 import com.pholser.junit.quickcheck.Property;
@@ -36,7 +36,7 @@ public class GenTestCode {
 			}
 		}
 
-		String s=Utils.toString(form);
+		String s=form.toString();
 		doMutateTest(s);
 	}
 
@@ -57,7 +57,7 @@ public class GenTestCode {
 		try {
 			String source=sb.toString();
 			ACell newForm=Reader.read(source);
-			Syntax newSyntax=Reader.readSyntax(source);
+			// Syntax newSyntax=Reader.readSyntax(source);
 		} catch (ParseException p) {
 			// OK, we broken the string
 		}

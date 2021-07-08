@@ -10,7 +10,7 @@ import java.util.ListIterator;
 
 public class Tokenizer {
 
-	private static final String WHITESPACE = " \t\f";
+	private static final String WHITESPACE = " \t\f,";
 
 	private static final char TAB_CHAR = '\t';
 

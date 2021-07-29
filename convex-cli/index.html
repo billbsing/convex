@@ -906,110 +906,266 @@ These types of files are:</p>
 <div class="paragraph">
 <p>The CLI is split into commands and some sub commands they are:</p>
 </div>
-<div class="ulist">
-<ul>
-<li>
-<p><strong>account</strong>, <strong>ac</strong>
-Manages convex accounts.</p>
-<div class="ulist">
-<ul>
-<li>
-<p><strong>balance</strong>, <strong>bal</strong>, <strong>ba</strong>
-Get account balance.</p>
-</li>
-<li>
-<p><strong>create</strong>, <strong>cr</strong>
-Creates an account using a public/private key from the keystore.
+<div class="dlist">
+<dl>
+<dt class="hdlist1">Account Commands</dt>
+</dl>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 25%;">
+<col style="width: 25%;">
+<col style="width: 50%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Command</th>
+<th class="tableblock halign-left valign-top">Sub command</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">account, ac</p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Manages convex accounts.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">balance, bal, ba</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Get account balance.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">create, cr</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Creates an account using a public/private key from the keystore.
 You must provide a valid keystore password to the keystore.
-If the keystore is not at the default location also the keystore filename.</p>
-</li>
-<li>
-<p><strong>fund</strong>, <strong>fu</strong>
-Transfers funds to account using a public/private key from the keystore.
+If the keystore is not at the default location also the keystore filename.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">fund, fu</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Transfers funds to account using a public/private key from the keystore.
 You must provide a valid keystore password to the keystore and a valid address.
-If the keystore is not at the default location also the keystore filename.</p>
-</li>
-<li>
-<p><strong>information</strong>, <strong>info</strong>, <strong>in</strong>
-Get account information.</p>
-</li>
-</ul>
+If the keystore is not at the default location also the keystore filename.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">information, info, in</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Get account information.</p></td>
+</tr>
+</tbody>
+</table>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">Key Commands</dt>
+</dl>
 </div>
-</li>
-<li>
-<p><strong>key</strong>, <strong>ke</strong>
-Manage local Convex key store.</p>
-<div class="ulist">
-<ul>
-<li>
-<p><strong>import</strong>, <strong>im</strong>
-Import key pairs to the keystore.</p>
-</li>
-<li>
-<p><strong>generate</strong>, <strong>ge</strong>
-Generate 1 or more private key pairs.</p>
-</li>
-<li>
-<p><strong>list</strong>, <strong>li</strong>
-List available key pairs.</p>
-</li>
-<li>
-<p><strong>export</strong>, <strong>ex</strong>
-Export 1 or more key pairs from the keystore.</p>
-</li>
-</ul>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 25%;">
+<col style="width: 25%;">
+<col style="width: 50%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Command</th>
+<th class="tableblock halign-left valign-top">Sub command</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">key, ke</p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Manage local Convex key store.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">import, im</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Import key pairs to the keystore.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">generate, ge</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Generate 1 or more private key pairs.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">list, li</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">List available key pairs.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">export, ex</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Export 1 or more key pairs from the keystore.</p></td>
+</tr>
+</tbody>
+</table>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">Local Commands</dt>
+</dl>
 </div>
-</li>
-<li>
-<p><strong>local</strong>, <strong>lo</strong>
-Operates a local convex network.</p>
-<div class="ulist">
-<ul>
-<li>
-<p><strong>gui</strong>
-Starts a local convex test network using the peer manager GUI application.</p>
-</li>
-<li>
-<p><strong>start</strong>, <strong>st</strong>
-Starts a local convex test network.</p>
-</li>
-</ul>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 25%;">
+<col style="width: 25%;">
+<col style="width: 50%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Command</th>
+<th class="tableblock halign-left valign-top">Sub command</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">local, lo</p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Operates a local convex network.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">gui</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Starts a local convex test network using the peer manager GUI application.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">start, st</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Starts a local convex test network.</p></td>
+</tr>
+</tbody>
+</table>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">Peer Commands</dt>
+</dl>
 </div>
-</li>
-<li>
-<p><strong>peer</strong>, <strong>pe</strong>
-Operates a local peer.</p>
-<div class="ulist">
-<ul>
-<li>
-<p><strong>create</strong>, <strong>cr</strong>
-Creates a keypair, new account and a funding stake: to run a local peer.</p>
-</li>
-<li>
-<p><strong>start</strong>, <strong>st</strong>
-Starts a local peer.</p>
-</li>
-</ul>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 25%;">
+<col style="width: 25%;">
+<col style="width: 50%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Command</th>
+<th class="tableblock halign-left valign-top">Sub command</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">peer, pe</p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Operates a local peer.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">create, cr</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Creates a keypair, new account and a funding stake: to run a local peer.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">start, st</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Starts a local peer.</p></td>
+</tr>
+</tbody>
+</table>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">Query Command</dt>
+</dl>
 </div>
-</li>
-<li>
-<p><strong>query</strong>, <strong>qu</strong>
-Execute a query on the current peer.</p>
-</li>
-<li>
-<p><strong>status</strong>, <strong>st</strong>
-Reports on the current status of the network.</p>
-</li>
-<li>
-<p><strong>transaction</strong>, <strong>transact</strong>, <strong>tr</strong>
-Execute a transaction on the network via a peer.</p>
-</li>
-<li>
-<p><strong>help</strong>
-Displays help information about the specified command</p>
-</li>
-</ul>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Command</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">query, qu</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Execute a query on the current peer.</p></td>
+</tr>
+</tbody>
+</table>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">Status Command</dt>
+</dl>
 </div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Command</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">status, st</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Reports on the current status of the network.</p></td>
+</tr>
+</tbody>
+</table>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">Transaction Command</dt>
+</dl>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Command</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">transaction, transact, tr</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Execute a transaction on the network via a peer.</p></td>
+</tr>
+</tbody>
+</table>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">Help Command</dt>
+</dl>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Command</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">help</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Displays help information about the specified command</p></td>
+</tr>
+</tbody>
+</table>
 </div>
 <div class="sect2">
 <h3 id="_requesting_help">Requesting Help</h3>
@@ -1057,6 +1213,10 @@ effecting any other networks.</p>
 </div>
 <div class="paragraph">
 <p>You wil always need to pass the password to the <strong>keystore</strong> file since the CLI will need access to create and start up the local peers.</p>
+</div>
+<div class="paragraph">
+<p>The CLI will automatically create 4 keypairs and place them in the keystore. The CLI will then start up 4 peers all sharing a single
+temporary local <em>Etch Database</em> in the /tmp folder.</p>
 </div>
 </div>
 <div class="sect2">
@@ -1126,7 +1286,7 @@ to use to start up a local network.</p>
 </div>
 </div>
 <div class="paragraph">
-<p>Will start the same peers.</p>
+<p>Will start the same set of peers as above using the first 4 key pairs from the keystore.</p>
 </div>
 </td>
 </tr>
@@ -1223,7 +1383,7 @@ to use to start up a local network.</p>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2021-07-29 07:10:05 UTC
+Last updated 2021-07-29 07:47:58 UTC
 </div>
 </div>
 </body>

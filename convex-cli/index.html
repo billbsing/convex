@@ -1306,6 +1306,22 @@ effecting any other networks.</p>
 <p>The CLI will automatically create 4 keypairs and place them in the keystore. The CLI will then start up 4 peers all sharing a single
 temporary local <em>Etch Database</em> in the /tmp folder.</p>
 </div>
+<div class="paragraph">
+<p>The Simple local start consists of the following steps:</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Create the <em>count</em> number of peer keypairs.</p>
+</li>
+<li>
+<p>Store the new keypairs in the keystore.</p>
+</li>
+<li>
+<p>Start up the local network using the new created keys.</p>
+</li>
+</ol>
+</div>
 </div>
 <div class="sect2">
 <h3 id="_local_start_with_peer_keys">Local start with peer keys</h3>
@@ -1507,6 +1523,124 @@ convex.local.index-key = 3</pre>
 #4: Peer:0fce50 URL: localhost:46559 Status: J  S Connections: 3/ 3 Consensus:  20 State:cfa8fe Belief:2c6f2a Msg: trusted connection</pre>
 </div>
 </div>
+<div class="paragraph">
+<p>On every event that occurs for a peer in the cluster, on it&#8217;s own an event is shown as a line.</p>
+</div>
+<div class="paragraph">
+<p>The event data can be split up into the following fields:</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 25%;">
+<col style="width: 50%;">
+<col style="width: 25%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Description</th>
+<th class="tableblock halign-left valign-top">Example</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Index</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Peer index starting at 1 within the cluster of peers</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>#4</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Peer</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>First 6 characters of the public key of the peer</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Peer:0fce50</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">URL</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>URL of the peer</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>URL: localhost:46559</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Status</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="hdlist">
+<table>
+<tr>
+<td class="hdlist1">
+NJ
+</td>
+<td class="hdlist2">
+<p>Not Joined</p>
+</td>
+</tr>
+<tr>
+<td class="hdlist1">
+J
+</td>
+<td class="hdlist2">
+<p>Joined</p>
+</td>
+</tr>
+<tr>
+<td class="hdlist1">
+NS
+</td>
+<td class="hdlist2">
+<p>Not Synced</p>
+</td>
+</tr>
+<tr>
+<td class="hdlist1">
+S
+</td>
+<td class="hdlist2">
+<p>Synced</p>
+</td>
+</tr>
+</table>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Status: J  S</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Connections</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><em>Peer connection count</em> / <em>Peer trusted connection count</em></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Connections: 3/ 2</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Consensus</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Consensus level</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Consensus:  20</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">State</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>First 6 characters of the State hash</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>State:cfa8fe</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Belief</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>First 6 characters of the Belief hash</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Belief:2c6f2a</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Msg</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Short message of the event that occured on this peer</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Msg: trusted connection</code></p></td>
+</tr>
+</tbody>
+</table>
 </div>
 </div>
 <div class="sect1">
@@ -1600,7 +1734,7 @@ convex.local.index-key = 3</pre>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2021-07-30 05:23:39 UTC
+Last updated 2021-07-30 06:36:32 UTC
 </div>
 </div>
 </body>

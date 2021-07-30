@@ -696,31 +696,49 @@ window.onload = function() {
 <li><a href="#_running_the_cli">Running the CLI</a>
 <ul class="sectlevel2">
 <li><a href="#_commands">Commands</a></li>
+<li><a href="#_shared_options">Shared Options</a></li>
 <li><a href="#_requesting_help">Requesting Help</a></li>
 </ul>
 </li>
-<li><a href="#_starting_a_local_network">Starting a local network</a>
+<li><a href="#command-local-start">Starting a local network</a>
 <ul class="sectlevel2">
 <li><a href="#_simple_local_start">Simple local start</a></li>
-<li><a href="#_local_start_with_preset_peer_keys">Local start with preset peer keys</a></li>
+<li><a href="#_local_start_with_peer_keys">Local start with peer keys</a></li>
+<li><a href="#_local_start_with_config_file">Local start with config file</a></li>
 </ul>
 </li>
-<li><a href="#_starting_a_local_peer">Starting a local Peer</a></li>
-<li><a href="#_starting_the_gui_local_network">Starting the GUI local network</a></li>
-<li><a href="#_startning_a_local_peer_to_a_remote_convex_network">Startning a local Peer to a remote Convex network</a></li>
-<li><a href="#_managing_your_keys_the_keystore">Managing your Keys - The Keystore</a></li>
-<li><a href="#_managing_accounts">Managing Accounts</a></li>
-<li><a href="#_queries">Queries</a></li>
-<li><a href="#_trancsactions">Trancsactions</a></li>
+<li><a href="#command-peer-start-local">Starting a local Peer</a></li>
+<li><a href="#command-peer-start-remote">Starting a local Peer to a remote Convex network</a></li>
+<li><a href="#command-local-gui">Starting the GUI local network</a></li>
+<li><a href="#_peer_output">Peer Output</a></li>
+<li><a href="#command-keys">Managing your Keys - The Keystore</a>
+<ul class="sectlevel2">
+<li><a href="#command-key-generate">Generating keypairs</a></li>
+<li><a href="#command-key-list">List keys</a></li>
+<li><a href="#command-key-export">Export keys</a></li>
+<li><a href="#command-key-import">Import keys</a></li>
+</ul>
+</li>
+<li><a href="#command-accounts">Managing Accounts</a>
+<ul class="sectlevel2">
+<li><a href="#command-account-create">Create an account</a></li>
+<li><a href="#command-account-balance">Get an accounts balance</a></li>
+<li><a href="#command-account-fund">Request funds for an account</a></li>
+<li><a href="#command-account-info">Get information about an account</a></li>
+</ul>
+</li>
+<li><a href="#command-status">Status</a></li>
+<li><a href="#command-query">Queries</a></li>
+<li><a href="#command-transaction">Trancsactions</a></li>
 </ul>
 </div>
 </div>
 <div id="content">
 <div id="preamble">
 <div class="sectionbody">
-<div class="imageblock">
+<div class="imageblock right">
 <div class="content">
-<svg viewBox="0 0 56 64" version="1.1" width="200"><title>Convex logo</title><desc>Created with Sketch.</desc><g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" id="v0" class="1"><g transform="translate(-692.000000, -139.000000)" id="Home"><g id="section-hero"><g transform="translate(256.000000, 139.000000)" id="Hero-Block-Content"><g transform="translate(436.000000, 0.000000)" id="Convex-logo"><polygon fill="#132773" points="28.0008 64 55.9988 48 55.9988 16.002" id="Fill-1"></polygon><polygon fill="#4B74CF" points="0 47.9998 28 63.9998 0 15.9998" id="Fill-2"></polygon><polygon fill="#62A6E1" points="28.0008 -0.0008 28.0008 63.9992 55.9988 16.0032 55.9988 15.9992" id="Fill-3"></polygon><polygon fill="#C3EAFC" points="28.0008 -0.0008 0.0008 15.9992 28.0008 63.9992" id="Fill-4"></polygon></g></g></g></g></g></svg>
+<svg viewBox="0 0 56 64" version="1.1" width="100"><title>Convex logo</title><desc>Created with Sketch.</desc><g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" id="v0" class="1"><g transform="translate(-692.000000, -139.000000)" id="Home"><g id="section-hero"><g transform="translate(256.000000, 139.000000)" id="Hero-Block-Content"><g transform="translate(436.000000, 0.000000)" id="Convex-logo"><polygon fill="#132773" points="28.0008 64 55.9988 48 55.9988 16.002" id="Fill-1"></polygon><polygon fill="#4B74CF" points="0 47.9998 28 63.9998 0 15.9998" id="Fill-2"></polygon><polygon fill="#62A6E1" points="28.0008 -0.0008 28.0008 63.9992 55.9988 16.0032 55.9988 15.9992" id="Fill-3"></polygon><polygon fill="#C3EAFC" points="28.0008 -0.0008 0.0008 15.9992 28.0008 63.9992" id="Fill-4"></polygon></g></g></g></g></g></svg>
 </div>
 </div>
 </div>
@@ -729,12 +747,13 @@ window.onload = function() {
 <h2 id="_introduction">Introduction</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Convex Command Line Interface or CLI, allows you to control and setup a local Convex network and peers.</p>
+<p>Convex Command Line Interface or CLI, allows you to control and setup a local Convex network and peers.
+More information can be found at <a href="https://convex.world">convex.world</a>.</p>
 </div>
 <div class="sect2">
 <h3 id="_overview">Overview</h3>
 <div class="paragraph">
-<p>The CLI is part of the Convex library. The CLI has been built to do two things:</p>
+<p>The CLI is part of the Convex library. The CLI has been built to do the following things:</p>
 </div>
 <div class="olist arabic">
 <ol class="arabic">
@@ -764,13 +783,13 @@ window.onload = function() {
 <div class="sect2">
 <h3 id="_get_the_source">Get the source</h3>
 <div class="paragraph">
-<p>You will need to visit <a href="https://github.com/Convex-Dev/convex/tree/develop">convex</a> and
-git clone the repository onto your local computer.</p>
+<p>You will need to visit <a href="https://github.com/Convex-Dev/convex">convex-dev @ github</a> and clone the repository onto your local computer.</p>
 </div>
 <div class="paragraph">
 <p>At the moment the develop branch is currently the latest version.</p>
 </div>
 <div class="literalblock">
+<div class="title">terminal commands</div>
 <div class="content">
 <pre>git clone https://github.com/Convex-Dev/convex.git
 cd convex
@@ -784,24 +803,29 @@ git pull</pre>
 <div class="paragraph">
 <p>The Convex repository is made up of the following sub projects:</p>
 </div>
-<div class="ulist">
-<ul>
-<li>
-<p><strong>convex-benchmaks</strong>:     Run benchmarks on the convex network.</p>
-</li>
-<li>
-<p><strong>convex-cli</strong>:           This CLI</p>
-</li>
-<li>
-<p><strong>convex-core</strong>:          The main convex core library.</p>
-</li>
-<li>
-<p><strong>convex-gui</strong>:           A local convex network running as a GUI application.</p>
-</li>
-<li>
-<p><strong>convex-peer</strong>:          Peer library used to run convex peer.</p>
-</li>
-</ul>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">convex-benchmaks</dt>
+<dd>
+<p>Run benchmarks on the convex network.</p>
+</dd>
+<dt class="hdlist1">convex-cli</dt>
+<dd>
+<p>This CLI project.</p>
+</dd>
+<dt class="hdlist1">convex-core</dt>
+<dd>
+<p>The main convex core library.</p>
+</dd>
+<dt class="hdlist1">convex-gui</dt>
+<dd>
+<p>A local convex network running as a GUI application.</p>
+</dd>
+<dt class="hdlist1">convex-peer</dt>
+<dd>
+<p>Peer library used to run convex peer.</p>
+</dd>
+</dl>
 </div>
 <div class="paragraph">
 <p>The CLI project is currently part of the main Convex repository.</p>
@@ -810,12 +834,13 @@ git pull</pre>
 <div class="sect2">
 <h3 id="_compile_and_setup">Compile and Setup</h3>
 <div class="paragraph">
-<p>Once you have got the latest source of Convex, you can now compile the suite of projects.</p>
+<p>Once you have downloaded the latest source of Convex, you can now compile the suite of projects.</p>
 </div>
 <div class="paragraph">
 <p>To do this you need to execute Maven install or package</p>
 </div>
 <div class="literalblock">
+<div class="title">terminal command</div>
 <div class="content">
 <pre>mvn install</pre>
 </div>
@@ -824,6 +849,7 @@ git pull</pre>
 <p>or</p>
 </div>
 <div class="literalblock">
+<div class="title">terminal command</div>
 <div class="content">
 <pre>mvn package</pre>
 </div>
@@ -836,6 +862,7 @@ git pull</pre>
 generated by the Maven build process:</p>
 </div>
 <div class="listingblock">
+<div class="title">output</div>
 <div class="content">
 <pre>[INFO] ------------------------------------------------------------------------
 [INFO] Reactor Summary for convex 0.7.0-SNAPSHOT:
@@ -858,8 +885,8 @@ generated by the Maven build process:</p>
 <div class="sect2">
 <h3 id="_files_needed_by_cli_run_a_local_network_or_peer">Files needed by CLI run a local Network or Peer</h3>
 <div class="paragraph">
-<p>The CLI needs 3 types of files to read/create/write before running a local Convex network or a Peer.
-These types of files are:</p>
+<p>The CLI needs 3 types of files to read or write before running a local Convex network or as a Peer.
+The type of files are:</p>
 </div>
 <div class="olist arabic">
 <ol class="arabic">
@@ -938,16 +965,12 @@ These types of files are:</p>
 <tr>
 <td class="tableblock halign-left valign-top"></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">create, cr</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Creates an account using a public/private key from the keystore.
-You must provide a valid keystore password to the keystore.
-If the keystore is not at the default location also the keystore filename.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Creates an account using a public/private key from the keystore.</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">fund, fu</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Transfers funds to account using a public/private key from the keystore.
-You must provide a valid keystore password to the keystore and a valid address.
-If the keystore is not at the default location also the keystore filename.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Transfers funds to account using a public/private key from the keystore.</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"></td>
@@ -1168,6 +1191,68 @@ If the keystore is not at the default location also the keystore filename.</p></
 </table>
 </div>
 <div class="sect2">
+<h3 id="_shared_options">Shared Options</h3>
+<div class="paragraph">
+<p>There are a few common options that can be used with any command or sub command. They are as follows:</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 14.2857%;">
+<col style="width: 28.5714%;">
+<col style="width: 57.1429%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Short Option</th>
+<th class="tableblock halign-left valign-top">Long Option</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">-c</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">--config=&lt;configFilename&gt;</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Use the specified config file.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">-e</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">--etch=&lt;etchStoreFilename&gt;</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Convex state storage filename. The default is to use a temporary storage filename.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">-k</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">--keystore=&lt;keyStoreFilename&gt;</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">keystore filename. Default: ~/.convex/keystore.pfx</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">-p</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">--password=&lt;password&gt;</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Password to read/write to the Keystore</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">-s</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">--session=&lt;sessionFilename&gt;</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Session filename. Defaults ~/.convex/session.conf</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">-v</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">--verbose</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Show more verbose log information. You can increase verbosity by using multiple -v or -vvv</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">-h</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">--help</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Show this help message and exit.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">-V</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">--version</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Print version information and exit.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect2">
 <h3 id="_requesting_help">Requesting Help</h3>
 <div class="paragraph">
 <p>The CLI supports help using the <strong>-h</strong> or <strong>--help</strong> options or the command <strong>help</strong>. For each sub command there are more help options.</p>
@@ -1176,6 +1261,7 @@ If the keystore is not at the default location also the keystore filename.</p></
 <p>So for example</p>
 </div>
 <div class="literalblock">
+<div class="title">terminal command</div>
 <div class="content">
 <pre>./convex --help</pre>
 </div>
@@ -1184,6 +1270,7 @@ If the keystore is not at the default location also the keystore filename.</p></
 <p>will show the common options for all commands, and the list of available commands.</p>
 </div>
 <div class="literalblock">
+<div class="title">terminal command</div>
 <div class="content">
 <pre>./convex local start --help</pre>
 </div>
@@ -1195,7 +1282,7 @@ If the keystore is not at the default location also the keystore filename.</p></
 </div>
 </div>
 <div class="sect1">
-<h2 id="_starting_a_local_network">Starting a local network</h2>
+<h2 id="command-local-start">Starting a local network</h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>The CLI is designed to start a local Convex network. This will allow for the developer/tester to try out Convex in a local environment without
@@ -1207,6 +1294,7 @@ effecting any other networks.</p>
 <p>The simplest way to start up the local Convex network is to run the following command:</p>
 </div>
 <div class="literalblock">
+<div class="title">terminal command</div>
 <div class="content">
 <pre>./convex local start --password=my-password</pre>
 </div>
@@ -1220,24 +1308,25 @@ temporary local <em>Etch Database</em> in the /tmp folder.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_local_start_with_preset_peer_keys">Local start with preset peer keys</h3>
+<h3 id="_local_start_with_peer_keys">Local start with peer keys</h3>
 <div class="paragraph">
-<p>Whilst the simple local start will auto generate public keys for the local peers. You can always select the peer keys you wish
-to use to start up a local network.</p>
+<p>While the simple local start will auto generate public keys for the local peers, create the peer accounts. You have the option to start any number of peers using the private keys from your keystore. To do this you need to provide a list of public keys that you want the CLI to use to start up the local network.</p>
 </div>
 <div class="paragraph">
-<p>If you have already used the simple local start, you can get the list of keys created by running:</p>
+<p>If you have already used the simple local start, you can get the list of keys created by running the <a href="#command-key-list">List keys</a>,
+this will show you the list of keys that have been stored in the key store.</p>
 </div>
 <div class="listingblock">
+<div class="title">terminal session</div>
 <div class="content">
-<pre>    ./convex key list --password=my-password
+<pre>./convex key list --password=my-password
 
-    Index Public Key
-    1 6e89035fce6d842b65e7831433fb3426928865a3c8de9536cfa50a1928eb0276 <i class="conum" data-value="1"></i><b>(1)</b>
-    2 13e691e05dee5a2c5ad90f6802f4ac5c274582ca5332516dc4740ae55d817856
-    3 8291e8976e0ee0363f98f819712552924e1dd1d8ab77c4dc8577765ee3eb2d36
-    4 ce55bb850cefaf87c5a16ab7c410f942e11463d0000eb71e8a22e6ce76301b5c
-    5 21076aa0c88baba170e62196b5735316f6cc1c5bfe672c0c1e5f9b85d8aaf8cb</pre>
+Index Public Key
+1 6e89035fce6d842b65e7831433fb3426928865a3c8de9536cfa50a1928eb0276 <i class="conum" data-value="1"></i><b>(1)</b>
+2 13e691e05dee5a2c5ad90f6802f4ac5c274582ca5332516dc4740ae55d817856
+3 8291e8976e0ee0363f98f819712552924e1dd1d8ab77c4dc8577765ee3eb2d36
+4 ce55bb850cefaf87c5a16ab7c410f942e11463d0000eb71e8a22e6ce76301b5c
+5 21076aa0c88baba170e62196b5735316f6cc1c5bfe672c0c1e5f9b85d8aaf8cb</pre>
 </div>
 </div>
 <div class="colist arabic">
@@ -1249,26 +1338,28 @@ to use to start up a local network.</p>
 </table>
 </div>
 <div class="paragraph">
-<p>This will show you the list of keys that have been stored in the key store.</p>
+<p>See <a href="#command-keys">Managing your Keys - The Keystore</a> for more informaton.</p>
 </div>
 <div class="paragraph">
-<p>To start up the local Convex network with the first 4 public keys you can run the following command:</p>
+<p>To start up the local Convex network with the first 4 public keys for the first 4 peers you can run the following command:</p>
 </div>
 <div class="literalblock">
+<div class="title">terminal command</div>
 <div class="content">
-<pre>./convex local start --public-key=6e89035 --public-key=13e691e --public-key=8291e8976 --public-key=ce55bb8 --password=my-password</pre>
+<pre>./convex local start --public-key=6e89035 --public-key=13e691e --public-key=8291e89 --public-key=ce55bb8 --password=my-password</pre>
 </div>
 </div>
 <div class="paragraph">
-<p>or you can combine the public key fields into a single comma seperated list</p>
+<p>or you can combine the public key fields together into a single comma seperated list option such as:</p>
 </div>
 <div class="literalblock">
+<div class="title">terminal command</div>
 <div class="content">
-<pre>./convex local start --public-key=6e89035,13e691e,8291e8976,ce55bb8 --password=my-password</pre>
+<pre>./convex local start --public-key=6e89035,13e691e,8291e89,ce55bb8 --password=my-password</pre>
 </div>
 </div>
 <div class="paragraph">
-<p>This will now start up a local Convex network with 4 peers using the same public keys for each peer.</p>
+<p>This will now start up a local Convex network with 4 peers each using a public key from the list provided in the keystore.</p>
 </div>
 <div class="admonitionblock tip">
 <table>
@@ -1292,14 +1383,26 @@ to use to start up a local network.</p>
 </tr>
 </table>
 </div>
+</div>
+<div class="sect2">
+<h3 id="_local_start_with_config_file">Local start with config file</h3>
+<div class="paragraph">
+<p>You can create a config file and assign the command options as config items. You can then start your
+local network using a config file, instead of providing a list of keys.</p>
+</div>
+<div class="literalblock">
+<div class="title">terminal command</div>
+<div class="content">
+<pre>./convex local start --config=example_convex_local_start.conf</pre>
+</div>
+</div>
 <div class="sect3">
 <h4 id="_config_parameters_for_convex_local_start">Config Parameters for convex.local.start</h4>
 <div class="listingblock">
-<div class="title">convex.conf</div>
+<div class="title">file: example_convex_local_start.conf</div>
 <div class="content">
-<pre>    # if no database file is provided then the CLI will create a
-    # temporary etch storage database at /tmp/etchxxx.tmp
-    convex.etch=
+<pre>    # etch storage database
+    convex.etch = <i class="conum" data-value="1"></i><b>(1)</b>
 
     # default keystore filename
     convex.keystore =$HOME/.convex/keystore.pfx
@@ -1308,24 +1411,52 @@ to use to start up a local network.</p>
     convex.session = $HOME/.convex/session.conf
 
     # number of peers to start
-    convex.local.start=4
+    convex.local.start = 4
 
-    # comma list of index of keys or items
-    convex.local.index-key=
+    # comma list of index of keys or items <i class="conum" data-value="2"></i><b>(2)</b>
+    convex.local.start.index-key=
 
     # comma list of public-key hex values, or multiple items
-    convex.local.public-key=
+    convex.local.start.public-key=6e89035
+    convex.local.start.public-key=13e691e
+    convex.local.start.public-key=8291e89
+    convex.local.start.public-key=ce55bb8
 
     # keystore password
-    convex.local.password=</pre>
+    convex.local.password = <i class="conum" data-value="3"></i><b>(3)</b></pre>
 </div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>If no filename is provided, then the CLI will create a temporary etch storage database in the temp folder.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>You can provide a list of public keys or indexes or duplicate settings with different values.
+<div class="literalblock">
+<div class="content">
+<pre>convex.local.index-key = 1,2,3
+# is the same as
+convex.local.index-key = 1
+convex.local.index-key = 2
+convex.local.index-key = 3</pre>
+</div>
+</div></td>
+</tr>
+<tr>
+<td><i class="conum" data-value="3"></i><b>3</b></td>
+<td>If you do not provide a password, then the CLI will request a password on starting the local network.</td>
+</tr>
+</table>
 </div>
 </div>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_starting_a_local_peer">Starting a local Peer</h2>
+<h2 id="command-peer-start-local">Starting a local Peer</h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>How to start a local peer, and join a local Convex network.</p>
@@ -1333,15 +1464,7 @@ to use to start up a local network.</p>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_starting_the_gui_local_network">Starting the GUI local network</h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>How to start the gui local network.</p>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_startning_a_local_peer_to_a_remote_convex_network">Startning a local Peer to a remote Convex network</h2>
+<h2 id="command-peer-start-remote">Starting a local Peer to a remote Convex network</h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>How to start a local peer, that connects to a remote Convex network.</p>
@@ -1349,23 +1472,117 @@ to use to start up a local network.</p>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_managing_your_keys_the_keystore">Managing your Keys - The Keystore</h2>
+<h2 id="command-local-gui">Starting the GUI local network</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>How to start the gui local network.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_peer_output">Peer Output</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Describes the output fields</p>
+</div>
+<div class="listingblock small">
+<div class="title">Sample output</div>
+<div class="content">
+<pre>Starting network Id: 0xefe75ea61ad52b38f4455a88911b7bd851dc080090e1b1cb4ec75d85a44eb92d
+#2: Peer:1770c3 URL: localhost:43849 Status: J NS Connections: 1/ 0 Consensus:   0 State:efe75e Belief:46bbe3 Msg: connection
+#1: Peer:fa26c5 URL: localhost:41635 Status: J NS Connections: 1/ 0 Consensus:   0 State:efe75e Belief:7c7542 Msg: connection
+#3: Peer:556deb URL: localhost:37985 Status: J NS Connections: 1/ 0 Consensus:   0 State:efe75e Belief:a43082 Msg: connection
+#4: Peer:0fce50 URL: localhost:46559 Status: J NS Connections: 1/ 0 Consensus:   0 State:efe75e Belief:a98ea8 Msg: connection</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>then later</p>
+</div>
+<div class="listingblock small">
+<div class="title">Sample output</div>
+<div class="content">
+<pre>#2: Peer:1770c3 URL: localhost:43849 Status: J  S Connections: 3/ 3 Consensus:  20 State:cfa8fe Belief:2c6f2a Msg: trusted connection
+#4: Peer:0fce50 URL: localhost:46559 Status: J  S Connections: 3/ 2 Consensus:  20 State:cfa8fe Belief:2c6f2a Msg: connection
+#3: Peer:556deb URL: localhost:37985 Status: J  S Connections: 3/ 3 Consensus:  20 State:cfa8fe Belief:2c6f2a Msg: trusted connection
+#4: Peer:0fce50 URL: localhost:46559 Status: J  S Connections: 3/ 3 Consensus:  20 State:cfa8fe Belief:2c6f2a Msg: trusted connection</pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="command-keys">Managing your Keys - The Keystore</h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>To run any peer you need to manage the local public/private key pairs.</p>
 </div>
+<div class="sect2">
+<h3 id="command-key-generate">Generating keypairs</h3>
+<div class="paragraph">
+<p>How to generate a new set of public/private keys.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="command-key-list">List keys</h3>
+<div class="paragraph">
+<p>How to list the keys store in the keystore.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="command-key-export">Export keys</h3>
+<div class="paragraph">
+<p>How to export the keys from your keystore to encrypted text.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="command-key-import">Import keys</h3>
+<div class="paragraph">
+<p>How to import keys into the keystore.</p>
+</div>
+</div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_managing_accounts">Managing Accounts</h2>
+<h2 id="command-accounts">Managing Accounts</h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>Information on how to create, fund and get information about the local accounts.</p>
 </div>
+<div class="sect2">
+<h3 id="command-account-create">Create an account</h3>
+<div class="paragraph">
+<p>How to create a local account.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="command-account-balance">Get an accounts balance</h3>
+<div class="paragraph">
+<p>How to get an account&#8217;s balance.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="command-account-fund">Request funds for an account</h3>
+<div class="paragraph">
+<p>How to request funds for an account.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="command-account-info">Get information about an account</h3>
+<div class="paragraph">
+<p>How to get information about an account.</p>
+</div>
+</div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_queries">Queries</h2>
+<h2 id="command-status">Status</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>How to get the local network status.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="command-query">Queries</h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>How to execute queries on a local Convex network.</p>
@@ -1373,7 +1590,7 @@ to use to start up a local network.</p>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_trancsactions">Trancsactions</h2>
+<h2 id="command-transaction">Trancsactions</h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>How to execute transactions on a local Convex network.</p>
@@ -1383,7 +1600,7 @@ to use to start up a local network.</p>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2021-07-29 07:47:58 UTC
+Last updated 2021-07-30 05:23:39 UTC
 </div>
 </div>
 </body>

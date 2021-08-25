@@ -730,7 +730,7 @@ window.onload = function() {
 </li>
 <li><a href="#command-status">Status</a></li>
 <li><a href="#command-query">Queries</a></li>
-<li><a href="#command-transaction">Trancsactions</a></li>
+<li><a href="#command-transaction">Transactions</a></li>
 </ul>
 </div>
 </div>
@@ -913,7 +913,7 @@ The type of files are:</p>
 </td>
 <td class="content">
 <div class="paragraph">
-<p>The GUI version and the CLI run the same local network. The only difference is that the GUI does not create a session file. This means that some of the CLI features cannot be used with the GUI local network.</p>
+<p>The GUI version and the CLI run the same local network. The only difference is that the GUI stores the gensis keypairs in memory and does not create a session file. This means that some of the CLI features cannot be used with the GUI local network, such as transfering funds, creating accounts.</p>
 </div>
 </td>
 </tr>
@@ -2028,11 +2028,52 @@ to give another user, or application access to your network.</p>
 <div class="paragraph">
 <p>How to request funds for an account.</p>
 </div>
+<div class="paragraph">
+<p>With this command you can request funds for an account. This command transfers the funds from the first peer account to the named account. If the network has been started by the GUI or another user, you will not be able to run this command since the transfer of funds will need to know the private key of the first peer.</p>
+</div>
+<div class="paragraph">
+<p>For example, first create an account:</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>./convex account create --password=my-password</pre>
+</div>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>Public Key: 1a47522ec91db1209839cf96c99948e77c489310799b29e6bf02038bc67a111c
+Address: 46
+Account usage: to use this key can use the options --address=46 --public-key=1a4752</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>You can then request funds for this account by providing the <code>--address</code> and <code>--public-key</code></p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>./convex account fund --address=46 --public-key=1a4752 --password=my-password
+Balance: 100000000</pre>
+</div>
+</div>
 </div>
 <div class="sect2">
 <h3 id="command-account-info">Get information about an account</h3>
 <div class="paragraph">
 <p>How to get information about an account.</p>
+</div>
+<div class="paragraph">
+<p>This command returns the information about the account.</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>./convex account info 46
+Result: {:sequence 0,:balance 100000000,:allowance 0,:environment nil,:metadata nil,:holdings {},:controller nil,:key 0x1a47522ec91db1209839cf96c99948e77c489310799b29e6bf02038bc67a111c}</pre>
+</div>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>Data type: Record</pre>
+</div>
 </div>
 </div>
 </div>
@@ -2043,6 +2084,61 @@ to give another user, or application access to your network.</p>
 <div class="paragraph">
 <p>How to get the local network status.</p>
 </div>
+<div class="paragraph">
+<p>This command gets the current status from the local network.</p>
+</div>
+<div class="paragraph">
+<p>For example:</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>./convex  status --password=my-password
+State hash: 0x68b40285d8b3d5831d829f45acaa5066a793ac1aaa3fb603a07ef8c00512f414 <i class="conum" data-value="1"></i><b>(1)</b>
+Timestamp: 1580602820020 <i class="conum" data-value="2"></i><b>(2)</b>
+Timestamp value: 2020-02-02T00:20:20.020Z <i class="conum" data-value="3"></i><b>(3)</b>
+Global Fees: 0 <i class="conum" data-value="4"></i><b>(4)</b>
+Juice Price: 2 <i class="conum" data-value="5"></i><b>(5)</b>
+Total Funds: 1,000,000,000,000,000,000 <i class="conum" data-value="6"></i><b>(6)</b>
+Number of accounts: 46 <i class="conum" data-value="7"></i><b>(7)</b>
+Number of peers: 4 <i class="conum" data-value="8"></i><b>(8)</b></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>The current hash state for the local peer.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>The peer&#8217;s timestamp as a long number.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="3"></i><b>3</b></td>
+<td>The Peer&#8217;s timestamp</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="4"></i><b>4</b></td>
+<td>The amount of global fees.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="5"></i><b>5</b></td>
+<td>The current juice price for each transaction.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="6"></i><b>6</b></td>
+<td>Total funds available in this network.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="7"></i><b>7</b></td>
+<td>Total number of accounts in this network.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="8"></i><b>8</b></td>
+<td>Number of peers connected to this network.</td>
+</tr>
+</table>
+</div>
 </div>
 </div>
 <div class="sect1">
@@ -2051,20 +2147,59 @@ to give another user, or application access to your network.</p>
 <div class="paragraph">
 <p>How to execute queries on a local Convex network.</p>
 </div>
+<div class="paragraph">
+<p>When you run a query, you usually need to provide an account address <code>--address</code>, but this command uses a default account address.</p>
+</div>
+<div class="paragraph">
+<p>So to find out the current balance using the <code><strong>balance</strong></code> command you can run the following:</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>./convex query '*balance*'
+Result: 260397600000000000
+Data type: Long</pre>
+</div>
+</div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="command-transaction">Trancsactions</h2>
+<h2 id="command-transaction">Transactions</h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>How to execute transactions on a local Convex network.</p>
+</div>
+<div class="paragraph">
+<p>Submiting a ransaction on the Convex network can change the network state, and so this will incure a small fee that is passed back to the peers.</p>
+</div>
+<div class="paragraph">
+<p>So when sending a transaction you will need to provide a <code>--public-key</code> or <code>--index-key</code> field for the keypair stored in the keystore, and also the correct <code>--address</code>.</p>
+</div>
+<div class="paragraph">
+<p>For example:</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>./convex transaction --address=46 --public-key=1cf32e --password=secret "(map inc [1 2 3 4 5])"</pre>
+</div>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+The CLI uses the internal Peer API for queries and transactions. To use other Convex networks or remote Convex networks we suggest you use the public <a href="https://convex.world/documentation/client-api">Convex Client API interface</a> instead.
+</td>
+</tr>
+</table>
 </div>
 </div>
 </div>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2021-08-24 08:35:31 UTC
+Last updated 2021-08-25 07:48:10 UTC
 </div>
 </div>
 </body>

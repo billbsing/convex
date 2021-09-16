@@ -10,8 +10,10 @@ import convex.cli.peer.PeerManager;
 import convex.cli.peer.SessionItem;
 import convex.core.crypto.AKeyPair;
 import convex.core.data.Address;
+import convex.core.data.Hash;
 import convex.core.store.AStore;
 import convex.core.store.Stores;
+import convex.peer.Server;
 import etch.EtchStore;
 import picocli.CommandLine.Command;
 import picocli.CommandLine.Model.CommandSpec;
@@ -134,10 +136,8 @@ public class PeerStart implements Runnable {
 			}
 			peerManager = PeerManager.create(mainParent.getSessionFilename(), keyPair, peerAddress, store);
 			peerManager.startPeerEvents();
-			peerManager.launchPeer(port, remotePeerHostname, url, bindAddress);
-			while (true) {
-				Thread.sleep(1000);
-			}
+			Server server = peerManager.launchPeer(port, remotePeerHostname, url, bindAddress);
+			peerManager.startNetworkSync(server, remotePeerHostname);
 		} catch (Throwable t) {
 			mainParent.showError(t);
 		}

@@ -34,10 +34,12 @@ import convex.core.data.Address;
 import convex.core.data.Hash;
 import convex.core.data.Keyword;
 import convex.core.data.Keywords;
+import convex.core.data.Ref;
 import convex.core.data.SignedData;
 import convex.core.init.Init;
 import convex.core.lang.RT;
 import convex.core.store.AStore;
+import convex.core.store.Stores;
 import convex.core.util.Utils;
 import convex.peer.API;
 import convex.peer.IServerEvent;
@@ -131,7 +133,7 @@ public class PeerManager implements IServerEvent, IAcquireStatusEvent {
 		return hashList;
 	}
 
-    public void launchPeer(
+    public Server launchPeer(
 		int port,
 		String remotePeerHostname,
 		String url,
@@ -155,8 +157,38 @@ public class PeerManager implements IServerEvent, IAcquireStatusEvent {
 
 		peerServerList.add(server);
 		setupSession();
-//		Server firstServer = peerServerList.get(0);
-//		System.out.println("Starting network Id: "+ firstServer.getPeer().getNetworkID().toString());
+		return server;
+	}
+
+	public void startNetworkSync(Server server, String remotePeerHostname) {
+		convex.core.Peer peer = server.getPeer();
+		InetSocketAddress sourceAddr=Utils.toInetSocketAddress(remotePeerHostname);
+
+		try {
+			AStore store = Stores.current();
+			Convex convex=Convex.connect(sourceAddr);
+			convex.setAcquireStatusEventHook(this);
+			long index = 0;
+			long timeout = 1000 * 30;
+			while (true) {
+				long consensusPoint =  peer.getConsensusPoint();
+				if (index < consensusPoint) {
+					Hash h = peer.getStates().get(index).getHash();
+					try {
+						// System.out.println("get index " + index + " hash " + h);
+						double percentDone = ((double)index / (double)consensusPoint) * 100;
+						System.out.println(String.format("Full sync: %.1f%%", percentDone));
+						State state = (State) convex.acquire(h).get(timeout,TimeUnit.MILLISECONDS);
+					} catch (TimeoutException te) {
+						log.error("cannot sync " + te);
+					}
+					index += 1;
+				}
+				Thread.sleep(10);
+			}
+		} catch (ExecutionException|InterruptedException | IOException |TimeoutException e) {
+			log.error("cannot connect " + e);
+		}
 	}
 
 	protected void setupSession() {
